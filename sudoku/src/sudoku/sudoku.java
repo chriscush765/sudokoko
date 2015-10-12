@@ -42,7 +42,13 @@ public class sudoku {
 
 	
 	public static boolean checkBoard(int[][] arr) {
-		return false;
+		for(int i=0; i<arr.length; i++)
+			for(int c=0; c<arr[0].length; c++){
+				if(!(c+1>=arr[0].length))
+					if(arr[i][c+1]==arr[i][c])
+						return false;
+				
+			}
 	}
 
 }
