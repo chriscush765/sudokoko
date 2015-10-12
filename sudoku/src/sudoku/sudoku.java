@@ -7,31 +7,31 @@ public class sudoku {
 	public static double wow = 0;
 
 	public static void main(String[] args) {
-		int[][] board = new int[8][8];
+		int[][] board = new int[9][9];
 
-		placeQueen(0, 0, board);
+		placeNumber(0, 0, board);
 		System.out.println(wow);
 	}
 
-	public static boolean placeQueen(int x, int y, int[][] arr) {
+	public static boolean placeNumber(int x, int y, int[][] arr) {
 		wow++;
-		if (countQueens(arr) == 8)
+		if (checkBoard(arr))
 			return true;
 		if (y >= arr.length) // not off board
 			return false;
 		if (x >= arr[0].length) // not off to right
-			return placeQueen(0, y + 1, arr);
+			return placeNumber(0, y + 1, arr);
 		if (arr[y][x] == 1 || arr[y][x] == 2) // not on legitimate spot
-			return placeQueen(x + 1, y, arr);
+			return placeNumber(x + 1, y, arr);
 
 		arr[y][x] = 2;
 		drawLines(arr);
 
-		if (!placeQueen(x + 1, y, arr)) {
+		if (!placeNumber(x + 1, y, arr)) {
 			arr[y][x] = 0;
 			clearOnes(arr);
 			drawLines(arr);
-			return placeQueen(x + 1, y, arr);
+			return placeNumber(x + 1, y, arr);
 		} else {
 			System.out.println(success);
 			for (int[] row : arr) {
@@ -44,7 +44,7 @@ public class sudoku {
 			arr[y][x] = 0;
 			clearOnes(arr);
 			drawLines(arr);
-			return placeQueen(x + 1, y, arr);
+			return placeNumber(x + 1, y, arr);
 		}
 	}
 
@@ -109,15 +109,8 @@ public class sudoku {
 		}
 	}
 
-	public static int countQueens(int[][] arr) {
-		int count = 0;
-		for (int[] row : arr) {
-			for (int cell : row) {
-				if (cell == 2)
-					count++;
-			}
-		}
-		return count;
+	public static boolean checkBoard(int[][] arr) {
+		return false;
 	}
 
 	public static void clearOnes(int[][] arr) {
